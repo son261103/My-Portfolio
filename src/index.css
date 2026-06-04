@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@variant dark (.dark &);
+
+:root, html.light {
+  --bg-primary: #fafafc;
+  --bg-secondary: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --border-color: rgba(15, 23, 42, 0.08);
+  --theme-card: #ffffff;
+  --theme-card-border: rgba(15, 23, 42, 0.06);
+  --navbar-bg: rgba(250, 250, 252, 0.85);
+  --divider-color: rgba(15, 23, 42, 0.06);
+  --glass-panel-bg: rgba(255, 255, 255, 0.75);
+  --glass-panel-heavy-bg: rgba(255, 255, 255, 0.9);
+}
+
+html.dark {
+  --bg-primary: #050505;
+  --bg-secondary: #0a0a0a;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --theme-card: rgba(255, 255, 255, 0.015);
+  --theme-card-border: rgba(255, 255, 255, 0.08);
+  --navbar-bg: rgba(5, 5, 5, 0.85);
+  --divider-color: rgba(255, 255, 255, 0.08);
+  --glass-panel-bg: rgba(13, 11, 26, 0.45);
+  --glass-panel-heavy-bg: rgba(10, 8, 22, 0.9);
+}
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Be Vietnam Pro", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-brand-cyan: #06b6d4;
+  --color-brand-purple: #a855f7;
+  --color-brand-pink: #ec4899;
+  --color-brand-blue: #3b82f6;
+
+  --color-theme-bg: var(--bg-primary);
+  --color-theme-bg-sec: var(--bg-secondary);
+  --color-theme-text: var(--text-primary);
+  --color-theme-text-sec: var(--text-secondary);
+  --color-theme-border: var(--border-color);
+  --color-theme-card: var(--theme-card);
+  --color-theme-card-border: var(--theme-card-border);
+  --color-theme-navbar: var(--navbar-bg);
+  --color-theme-divider: var(--divider-color);
+
+  --animate-gradient-shift: gradient-shift 15s ease infinite;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+}
+
+/* Custom Base Styles */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #a855f7, #06b6d4);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #ec4899, #3b82f6);
+}
+
+/* Custom Glassmorphism styles */
+.glass-panel {
+  background: var(--glass-panel-bg);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid var(--border-color);
+}
+
+.glass-panel-heavy {
+  background: var(--glass-panel-heavy-bg);
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  border: 1px solid var(--border-color);
+}
+
+.glow-card {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.glow-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to bottom right, rgba(6, 182, 212, 0.2), rgba(168, 85, 247, 0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.glow-card:hover::before {
+  background: linear-gradient(to bottom right, #06b6d4, #a855f7, #ec4899);
+}
+
+/* Custom Glow effects */
+.glow-blur-cyan {
+  filter: drop-shadow(0 0 15px rgba(6, 182, 212, 0.4));
+}
+
+.glow-blur-purple {
+  filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.4));
+}
+
+/* Global browser focus outline reset to prevent sticky black/white native borders */
+button,
+input,
+select,
+textarea,
+a,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+button:focus,
+button:active,
+button:focus-visible,
+[role="button"]:focus,
+[role="button"]:active {
+  outline: none !important;
+  box-shadow: none !important;
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-ring-width: 0px !important;
+  --tw-ring-offset-width: 0px !important;
+  --tw-ring-color: transparent !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow, 0 0 #0000) !important;
+}
